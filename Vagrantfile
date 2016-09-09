@@ -22,6 +22,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.hostmanager.manage_host = true
     config.hostmanager.ignore_private_ip = false
     config.hostmanager.include_offline = true
+    config.ssh.insert_key = false
 
     config.vm.define node_name do |config|
       # configures all forwarding ports in JSON array
