@@ -28,4 +28,4 @@ INTERFACE=`ip a | grep -B2 192.168.144 | head -1 | awk '{print $2}' | cut -d ':'
 sed -i "s/eth1/$INTERFACE/" /etc/keepalived/keepalived.conf
 for SERVICE in keepalived haproxy; do systemctl restart $SERVICE; done
 
-printf "\n>>>\n>>> Finished bootstrapping $VM\n>>>\n\n>>> HAProxy is reachable via:\n>>> http://192.168.144.10:2000\n\n>>> Zabbix is reachable via:\n>>> http://192.168.144.10\n"
+printf "\n>>>\n>>> Finished bootstrapping $VM\n>>>\n\n>>> HAProxy is reachable via:\n>>> http://192.168.144.10:2000\n\n>>> Zabbix is reachable via:\n>>> https://192.168.144.10\n"^
