@@ -27,7 +27,7 @@ yum install -y zabbix-server-mysql
 
 printf "\n>>>\n>>> (STEP 4/5) Configuring Zabbix Server ...\n>>>\n\n"
 sleep 5
-cp /etc/zabbix/zabbix_server.conf /etc/zabbix/zabbix_server.conf.orig
+mv /etc/zabbix/zabbix_server.conf /etc/zabbix/zabbix_server.conf.orig
 cp /sources/$SOURCE/zabbix_server.conf /etc/zabbix/
 
 printf "\n>>>\n>>> (STEP 5/5) Configuring Zabbix cluster functionality ...\n>>>\n\n"

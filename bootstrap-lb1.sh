@@ -24,6 +24,8 @@ echo "net.ipv4.ip_forward = 1" >> /etc/sysctl.conf
 sysctl -p
 cp -f /sources/$SOURCE/keepalived.conf /etc/keepalived/keepalived.conf
 cp -f /sources/$SOURCE/haproxy.cfg /etc/haproxy/haproxy.cfg
+INTERFACE=`ip a | grep -B2 192.168.144 | head -1 | awk '{print $2}' | cut -d ':' -f1`
+sed -i "s/eth1/$INTERFACE/" /etc/keepalived/keepalived.conf
 for SERVICE in keepalived haproxy; do systemctl restart $SERVICE; done
 
-printf "\n>>>\n>>> Finished bootstrapping $VM\n>>>\n\n>>> HAProxy is reachable via:\n>>> http://192.168.144.10/haproxy\?stats\n\n>>> Zabbix is reachable via:\n>>> http://192.168.144.10/zabbix\n"
+printf "\n>>>\n>>> Finished bootstrapping $VM\n>>>\n\n>>> HAProxy is reachable via:\n>>> http://192.168.144.10:2000\n\n>>> Zabbix is reachable via:\n>>> http://192.168.144.10\n"

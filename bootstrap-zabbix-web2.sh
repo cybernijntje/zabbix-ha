@@ -16,13 +16,18 @@ sleep 5
 yum install -y epel-release
 yum update
 rpm -ivh http://repo.zabbix.com/zabbix/3.0/rhel/7/x86_64/zabbix-release-3.0-1.el7.noarch.rpm
-yum install -y httpd php zabbix-web-mysql
+yum install -y httpd mod_ssl php zabbix-web-mysql
 
 printf "\n>>>\n>>> (STEP 3/3) Configuring Zabbix Web ...\n>>>\n\n"
 sleep 5
-cp /etc/php.ini /etc/php.ini.orig
+
+openssl req -new -newkey rsa:4096 -days 365 -nodes -x509 -subj "/C=NL/ST=Denial/L=Amsterdam/O=Dis/CN=www.devops.com" -keyout /etc/pki/tls/private/zabbix.key -out /etc/pki/tls/private/zabbix.crt >/dev/null 2>&1
+mv /etc/php.ini /etc/php.ini.orig
 cp /sources/$SOURCE/php.ini /etc/
 cp /sources/$SOURCE/zabbix.conf.php /etc/zabbix/web/
+sed -i 's/Listen 443 https/#Listen 443 https/' /etc/httpd/conf.d/ssl.conf
+mv /etc/httpd/conf.d/zabbix.conf /etc/httpd/conf.d/zabbix.conf.orig
+cp /sources/$SOURCE/zabbix-vhost.conf /etc/httpd/conf.d/
 systemctl start httpd && systemctl enable httpd
 
 printf "\n>>>\n>>> Finished bootstrapping $VM\n"
