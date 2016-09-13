@@ -21,7 +21,8 @@ sleep 5
 groupadd tomcat
 useradd -M -s /bin/nologin -g tomcat -d /opt/tomcat tomcat
 mkdir /opt/tomcat
-tar xvf /sources/$SOURCE/apache-tomcat-8*tar.gz -C /opt/tomcat --strip-components=1
+wget http://mirrors.supportex.net/apache/tomcat/tomcat-8/v8.5.4/bin/apache-tomcat-8.5.4.tar.gz
+tar xvf apache-tomcat-8*tar.gz -C /opt/tomcat --strip-components=1
 cp /sources/$SOURCE/setenv.sh /opt/tomcat/bin
 /opt/tomcat/bin/startup.sh
 
