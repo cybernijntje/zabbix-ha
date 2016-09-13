@@ -23,12 +23,14 @@ sleep 5
 yum install -y epel-release
 yum update
 rpm -ivh http://repo.zabbix.com/zabbix/3.0/rhel/7/x86_64/zabbix-release-3.0-1.el7.noarch.rpm
-yum install -y zabbix-server-mysql
+yum install -y zabbix-server-mysql zabbix-java-gateway
 
 printf "\n>>>\n>>> (STEP 4/5) Configuring Zabbix Server ...\n>>>\n\n"
 sleep 5
 mv /etc/zabbix/zabbix_server.conf /etc/zabbix/zabbix_server.conf.orig
+mv /etc/zabbix/zabbix_java_gateway.conf /etc/zabbix/zabbix_java_gateway.conf.orig
 cp /sources/$SOURCE/zabbix_server.conf /etc/zabbix/
+cp /sources/$SOURCE/zabbix_java_gateway.conf /etc/zabbix/
 
 printf "\n>>>\n>>> (STEP 5/5) Configuring Zabbix cluster functionality ...\n>>>\n\n"
 sleep 5
@@ -46,6 +48,10 @@ pcs resource create zabbix_server systemd:zabbix-server op monitor interval=10s
 pcs constraint colocation add zabbix_server cluster_vip
 pcs constraint order cluster_vip then zabbix_server
 pcs resource restart zabbix_server
+pcs resource create zabbix_java_gateway systemd:zabbix-java-gateway op monitor interval=10s
+pcs constraint colocation add zabbix_java_gateway cluster_vip
+pcs constraint order cluster_vip then zabbix_java_gateway
+pcs resource restart zabbix_java_gateway
 pcs status
 
 printf "\n>>>\n>>> Finished bootstrapping $VM\n>>>\n\n>>> zabbix-server VIP is reachable via:\n>>> 192.168.144.15\n"

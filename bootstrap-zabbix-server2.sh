@@ -28,6 +28,8 @@ yum install -y zabbix-server-mysql
 printf "\n>>>\n>>> (STEP 4/4) Configuring Zabbix Server ...\n>>>\n\n"
 sleep 5
 mv /etc/zabbix/zabbix_server.conf /etc/zabbix/zabbix_server.conf.orig
+mv /etc/zabbix/zabbix_java_gateway.conf /etc/zabbix/zabbix_java_gateway.conf.orig
 cp /sources/$SOURCE/zabbix_server.conf /etc/zabbix/
+cp /sources/$SOURCE/zabbix_java_gateway.conf /etc/zabbix/
 
 printf "\n>>>\n>>> Finished bootstrapping $VM\n"
