@@ -71,6 +71,14 @@
       ":memory": 1024,
       ":box": "centos/7",
       ":bootstrap": "bootstrap-tomcat1.sh"
+    },
+    "grafana1.devops.com": {
+      ":ip": "192.168.144.30",
+      "ports": [],
+      ":cpus": 1,
+      ":memory": 1024,
+      ":box": "centos/7",
+      ":bootstrap": "bootstrap-grafana1.sh"
     }
   }
 }
