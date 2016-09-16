@@ -23,7 +23,7 @@ sleep 5
 yum install -y epel-release
 yum update
 rpm -ivh http://repo.zabbix.com/zabbix/3.0/rhel/7/x86_64/zabbix-release-3.0-1.el7.noarch.rpm
-yum install -y zabbix-server-mysql
+yum install -y zabbix-server-mysql zabbix-java-gateway
 
 printf "\n>>>\n>>> (STEP 4/4) Configuring Zabbix Server ...\n>>>\n\n"
 sleep 5
