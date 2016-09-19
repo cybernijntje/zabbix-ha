@@ -15,7 +15,7 @@ printf "\n>>>\n>>> (STEP 2/3) Installing Zabbix Web ...\n>>>\n\n"
 sleep 5
 yum install -y epel-release
 yum update
-rpm -ivh http://repo.zabbix.com/zabbix/3.0/rhel/7/x86_64/zabbix-release-3.0-1.el7.noarch.rpm
+rpm -ivh http://repo.zabbix.com/zabbix/3.2/rhel/7/x86_64/zabbix-release-3.2-1.el7.noarch.rpm
 yum install -y httpd mod_ssl php zabbix-web-mysql
 
 printf "\n>>>\n>>> (STEP 3/3) Configuring Zabbix Web ...\n>>>\n\n"
